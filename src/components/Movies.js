@@ -2,17 +2,21 @@ import React from 'react';
 import styled from 'styled-components'
 import { useSelector } from 'react-redux'
 import { selectMovie } from '../features/movie/movieSlice'
+import { Link } from 'react-router-dom'
 
 const Movies = () => {
     const movies = useSelector(selectMovie)
-    console.log(movies)
+
     return (
         <Container>
             <h4>Recommended for you</h4>
             <Content>
                 {movies && movies.map((movie, index) => (
                     <Wrap key={index}>
-                        <img src={movie.cardImg} alt={movie.title} />
+                        <Link to={`/detail/${movie.id}`} >
+
+                            <img src={movie.cardImg} alt={movie.title} />
+                        </Link>
                     </Wrap>
 
                 ))}
