@@ -21,14 +21,23 @@ const Details = () => {
                     <span>TRAILER</span>
                 </TrailerButton>
                 <AddButton>
+                    <span>+</span>
 
                 </AddButton>
                 <GroupWatchButton>
+                    <img src="/images/group-icon.png" alt="" />
 
                 </GroupWatchButton>
 
 
             </Controls>
+            <SubTitle>
+                 651-8817 to be eligible for a free coaching session!
+            </SubTitle>
+            <Description>
+                    
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio fugiat illum laborum eum officiis nesciunt perferendis expedita sequi ea corrupti.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cupiditate quos corporis maxime animi, totam vero magnam fuga ipsa accusantium exercitationem.
+            </Description>
         </Container>
     );
 }
@@ -75,6 +84,7 @@ const ImageTitle = styled.div`
 
 const Controls = styled.div`
 display:flex;
+align-items:center;
 `
 
 const PlyButton = styled.button`
@@ -96,14 +106,46 @@ cursor: pointer;
 `
 
 const AddButton = styled.button`
+    margin-right:16px;
+    height:44px;
+    width:44px;
+    display:flex;   
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    border-radius:50%;
+    border:2px solid white;
+    background-color:rgba(0, 0 , 0 ,0.6);
+    span{
+        font-size:30px;
+        color:white;
+    }
 
 `
 
 const TrailerButton = styled(PlyButton)`
 background:rgba(0,0,0,0.3);
-border:1px solid rgba(249 , 249 , 249);
+border:1px solid rgb(249 , 249 , 249);
+color:rgb(249 , 249 , 249);
+text-transform:uppercase;
 `
 
-const GroupWatchButton = styled.button`
+const GroupWatchButton = styled(AddButton)`
+background-color:rgb(0,0,0)
+
+`
+
+const SubTitle = styled.div`
+    color:rgb(249,249,249);
+    font-size:15px;
+    min-height:20px;
+    margin-top:20px;
+`
+
+const Description = styled.div`
+line-height:1.4;
+font-size:20px;
+margin-top:16px;
+color:rgb(249 , 249 , 249)
 
 `
