@@ -1,47 +1,22 @@
 import React from 'react';
 import styled from 'styled-components'
+import { useSelector } from 'react-redux'
+import { selectMovie } from '../features/movie/movieSlice'
 
 const Movies = () => {
+    const movies = useSelector(selectMovie)
+    console.log(movies)
     return (
         <Container>
-            <h4>Recomendated for you</h4>
+            <h4>Recommended for you</h4>
             <Content>
-                <Wrap>
-                    <img src="/images/viewers-national.png" alt=""/>
-                </Wrap>
-                 <Wrap>
-                    <img src="/images/viewers-national.png" alt=""/>
-                </Wrap>
-                <Wrap>
-                    <img src="/images/viewers-national.png" alt=""/>
-                </Wrap>
-                 <Wrap>
-                    <img src="/images/viewers-national.png" alt=""/>
-                </Wrap>
-                   <Wrap>
-                    <img src="/images/viewers-national.png" alt=""/>
-                </Wrap>
-                 <Wrap>
-                    <img src="/images/viewers-national.png" alt=""/>
-                </Wrap>
-                <Wrap>
-                    <img src="/images/viewers-national.png" alt=""/>
-                </Wrap>
-                 <Wrap>
-                    <img src="/images/viewers-national.png" alt=""/>
-                </Wrap>
-                   <Wrap>
-                    <img src="/images/viewers-national.png" alt=""/>
-                </Wrap>
-                 <Wrap>
-                    <img src="/images/viewers-national.png" alt=""/>
-                </Wrap>
-                <Wrap>
-                    <img src="/images/viewers-national.png" alt=""/>
-                </Wrap>
-                 <Wrap>
-                    <img src="/images/viewers-national.png" alt=""/>
-                </Wrap>
+                {movies && movies.map((movie, index) => (
+                    <Wrap key={index}>
+                        <img src={movie.cardImg} alt={movie.title} />
+                    </Wrap>
+
+                ))}
+
             </Content>
 
         </Container>
