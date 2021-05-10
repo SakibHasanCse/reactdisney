@@ -1,39 +1,63 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useSelector } from 'react-redux'
+import {
+    selectUserName,
+    selectUserPhoto
+} from '../features/auth/userSlice'
 
 const Header = () => {
+    const userName = useSelector(selectUserName);
+    const userPhoto = useSelector(selectUserPhoto)
     return (
         <Nav>
             <Logo src="/images/logo.svg" />
-            <NavMenu >
-                <a>
-                    <img src="/images/home-icon.svg" alt="" />
-                    <span>HOME</span>
-                </a>
-                <a>
-                    <img src="/images/search-icon.svg" alt="" />
-                    <span>SEARCH</span>
-                </a> <a>
-                    <img src="/images/watchliist-icon.svg" alt="" />
-                    <span>WATCHLIST</span>
-                </a> <a>
-                    <img src="/images/original-icon.svg" alt="" />
-                    <span>ORIGINALS</span>
-                </a>
-                <a>
-                    <img src="/images/movie-icon.svg" alt="" />
-                    <span>MOVIES</span>
-                </a>
-                <a>
-                    <img src="/images/series-icon.svg" alt="" />
-                    <span>SERIES</span>
-                </a>
-            </NavMenu>
-            <UserImage src="https://scontent.fdac5-2.fna.fbcdn.net/v/t1.6435-1/p320x320/86264389_1066822800317772_2323266682216251392_n.jpg?_nc_cat=107&ccb=1-3&_nc_sid=7206a8&_nc_ohc=bV54YhlY5RoAX8D9IEj&_nc_ht=scontent.fdac5-2.fna&tp=6&oh=47c88d09d174885dc42365dc36475c08&oe=60B682C8" />
+            {!userName ? (
+                <LoginContainer>
 
+                    <Login>Login</Login>
+                </LoginContainer>
+            )
+                :
+                <>
+
+                    <NavMenu >
+                        <a>
+                            <img src="/images/home-icon.svg" alt="" />
+                            <span>HOME</span>
+                        </a>
+                        <a>
+                            <img src="/images/search-icon.svg" alt="" />
+                            <span>SEARCH</span>
+                        </a> <a>
+                            <img src="/images/watchliist-icon.svg" alt="" />
+                            <span>WATCHLIST</span>
+                        </a> <a>
+                            <img src="/images/original-icon.svg" alt="" />
+                            <span>ORIGINALS</span>
+                        </a>
+                        <a>
+                            <img src="/images/movie-icon.svg" alt="" />
+                            <span>MOVIES</span>
+                        </a>
+                        <a>
+                            <img src="/images/series-icon.svg" alt="" />
+                            <span>SERIES</span>
+                        </a>
+                    </NavMenu>
+
+
+                    <UserImage src="https://scontent.fdac5-2.fna.fbcdn.net/v/t1.6435-1/p320x320/86264389_1066822800317772_2323266682216251392_n.jpg?_nc_cat=107&ccb=1-3&_nc_sid=7206a8&_nc_ohc=bV54YhlY5RoAX8D9IEj&_nc_ht=scontent.fdac5-2.fna&tp=6&oh=47c88d09d174885dc42365dc36475c08&oe=60B682C8" />
+                </>
+            }
         </Nav>
     )
 }
+
+
+export default Header
+
+
 
 const Nav = styled.div`
     height:70px;
@@ -98,6 +122,23 @@ const UserImage = styled.img`
     border-radius:50%;
 
 `
+const Login = styled.div`
+        border: 1px solid #f9f9f9;
+        padding: 8px 16px;
+        border-radius:4px;
+        letter-spacing:1.5px;
+        text-transform:uppercase;
+        background-color:rgba(0, 0 , 0,0.6);
+        cursor: pointer;
+    &:hover{
+        background:white;
+        color:rgba(0, 0 , 0,0.6);
+        border-color:transparent;
 
-export default Header
-
+    }
+`
+const LoginContainer = styled.div`
+    flex:1;
+    display:flex;
+    justify-content:flex-end;
+`
