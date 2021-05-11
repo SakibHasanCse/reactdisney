@@ -53,7 +53,7 @@ const Header = () => {
         </Nav>
     )
 }
-console.log("")
+
 
 export default Header
 
