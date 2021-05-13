@@ -1,21 +1,35 @@
 import React from 'react'
 import styled from 'styled-components'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import {
     selectUserName,
-    selectUserPhoto
+    selectUserPhoto,
+    setUserLogin
 } from '../features/auth/userSlice'
+import { auth, provider } from '../firebase'
 
 const Header = () => {
     const userName = useSelector(selectUserName);
-    const userPhoto = useSelector(selectUserPhoto)
+    const userPhoto = useSelector(selectUserPhoto);
+    const dispatch = useDispatch()
+    const signIn = () => {
+        auth.signInWithPopup(provider).then((response) => {
+            let user = response.user
+            dispatch(setUserLogin({
+                name: user.displayName,
+                email: user.email,
+                photo: user.photoURL
+            }))
+
+        })
+    }
     return (
         <Nav>
             <Logo src="/images/logo.svg" />
             {!userName ? (
                 <LoginContainer>
 
-                    <Login>Login</Login>
+                    <Login onClick={signIn}>Login</Login>
                 </LoginContainer>
             )
                 :
@@ -47,7 +61,7 @@ const Header = () => {
                     </NavMenu>
 
 
-                    <UserImage src="https://scontent.fdac5-2.fna.fbcdn.net/v/t1.6435-1/p320x320/86264389_1066822800317772_2323266682216251392_n.jpg?_nc_cat=107&ccb=1-3&_nc_sid=7206a8&_nc_ohc=bV54YhlY5RoAX8D9IEj&_nc_ht=scontent.fdac5-2.fna&tp=6&oh=47c88d09d174885dc42365dc36475c08&oe=60B682C8" />
+                    <UserImage src={userPhoto} />
                 </>
             }
         </Nav>
