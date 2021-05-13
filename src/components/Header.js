@@ -4,14 +4,17 @@ import { useSelector, useDispatch } from 'react-redux'
 import {
     selectUserName,
     selectUserPhoto,
-    setUserLogin
+    setUserLogin,
+    setSignOut
 } from '../features/auth/userSlice'
 import { auth, provider } from '../firebase'
+import { useHistory } from 'react-router-dom'
 
 const Header = () => {
     const userName = useSelector(selectUserName);
     const userPhoto = useSelector(selectUserPhoto);
     const dispatch = useDispatch()
+    const history = useHistory()
     const signIn = () => {
         auth.signInWithPopup(provider).then((response) => {
             let user = response.user
@@ -20,7 +23,14 @@ const Header = () => {
                 email: user.email,
                 photo: user.photoURL
             }))
+            history.push('/')
 
+        })
+    }
+    const signOut = () => {
+        auth.signOut().then((response) => {
+            dispatch(setSignOut())
+            history.push('/login')
         })
     }
     return (
@@ -61,7 +71,7 @@ const Header = () => {
                     </NavMenu>
 
 
-                    <UserImage src={userPhoto} />
+                    <UserImage onClick={signOut} src={userPhoto} />
                 </>
             }
         </Nav>
